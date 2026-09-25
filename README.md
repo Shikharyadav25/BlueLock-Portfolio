@@ -24,4 +24,3 @@ A Blue Lock-inspired portfolio website built using React.
    ```bash
    npm run build
    ```
-# BlueLock-Portfolio
