@@ -1,0 +1,423 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,400;0,700;1,700&family=Montserrat:wght@300;600&display=swap');
+
+.sp-container {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 6px;
+  padding-left: 3.5vw;
+  padding-top: 4vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.sp-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 80px;
+  line-height: 0.9;
+  color: #ffffff;
+  letter-spacing: 4px;
+  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.75);
+  opacity: 0;
+  transform: translateX(-48px);
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sp-container.mounted .sp-title,
+.sp-container.mounted .sp-subtitle {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.sp-subtitle {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.88);
+  letter-spacing: 0.5px;
+  max-width: 50vw;
+  line-height: 1.5;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+  opacity: 0;
+  transform: translateX(-48px);
+  transition: opacity 0.5s ease 0.1s, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.1s;
+}
+
+.sp-btn-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 14px;
+  padding-bottom: 30px;
+}
+
+/* ── sc-bar styling ── */
+.sp-bar-outer {
+  position: relative;
+  flex-shrink: 0;
+  opacity: 0;
+  transform: translateX(-48px);
+  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sp-bar-outer.mounted {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.sp-bar {
+  position: relative;
+  width: 48vw;
+  height: 58px;
+  transition: height 0.3s cubic-bezier(0.22, 1, 0.36, 1), transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+  background: #111;
+  cursor: pointer;
+  pointer-events: all;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 14px) 100%, 0 100%);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.65);
+  z-index: 1;
+}
+
+.sp-bar-outer.active .sp-bar {
+  height: 80px;
+  transform: translateX(6px) scale(1.02);
+  box-shadow: 10px 8px 0 #d63232;
+}
+
+.sp-bar-red {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 48vw;
+  height: 58px;
+  background: #c4001a;
+  clip-path: polygon(50% 0, 100% 0, 100% 100%, calc(50% - 10px) 100%);
+  transform: translateY(-7px);
+  opacity: 0;
+  transition: opacity 0.2s ease, height 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.sp-bar-outer.active .sp-bar-red {
+  height: 80px;
+  opacity: 1;
+}
+
+.sp-bar-fill {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  background: var(--p3-blue-light);
+  clip-path: polygon(100% 0, 100% 0, calc(100% - 32px) 100%, calc(100% - 32px) 100%);
+  transition: clip-path 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 0;
+}
+
+.sp-bar-outer.active .sp-bar-fill {
+  clip-path: polygon(22% 0, 100% 0, calc(100% - 14px) 100%, calc(22% + 138px) 100%);
+}
+
+.sp-bar-shade {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 73%;
+  width: 6%;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0) 100%);
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.sp-bar-outer.active .sp-bar-shade {
+  opacity: 1;
+}
+
+.sp-bar::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.55) 100%);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.sp-bar-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+}
+
+.sp-role {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  font-family: 'Anton', sans-serif;
+  font-size: 40px;
+  letter-spacing: 1px;
+  color: #ffffff;
+  transform: rotate(-30deg);
+  user-select: none;
+  line-height: 1;
+  padding: 0 12px 0 4px;
+  width: 110px;
+}
+
+.sp-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 2px;
+  padding-left: 20px;
+}
+
+.sp-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 26px;
+  letter-spacing: 2px;
+  line-height: 1.1;
+  color: rgba(255, 255, 255, 0.9);
+  transition: color 0.2s ease;
+  user-select: none;
+}
+
+.sp-bar-outer.active .sp-label {
+  color: var(--p3-text-on-light);
+}
+
+.sp-badge {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 17px;
+  letter-spacing: 1.2px;
+  padding: 3px 9px;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+  flex-shrink: 0;
+  margin-right: 10px;
+  transition: background 0.2s ease, color 0.2s ease;
+  user-select: none;
+}
+
+/* ── Info Bars (Right Side Details) ── */
+@keyframes sc-infobar-in {
+  0%   { opacity: 0; transform: translateX(40px); }
+  60%  { opacity: 1; transform: translateX(-4px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+.sp-info-bar-wrap {
+  position: fixed;
+  right: 40px;
+  left: min(58%, calc(100vw - 460px));
+  height: 52px;
+  background: transparent;
+  pointer-events: all;
+  z-index: 50;
+  padding: 0;
+  animation: sc-infobar-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), background 0.2s ease;
+  cursor: pointer;
+}
+
+.sp-info-bar-wrap.selected {
+  background: #111;
+  padding: 1.5px;
+  border-radius: 8px;
+  transform: translateX(-4px);
+}
+
+.sp-info-bar {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  transition: background 0.2s ease, border-radius 0.2s ease;
+}
+
+.sp-info-bar-wrap.selected .sp-info-bar {
+  background: var(--p3-blue-light);
+  border-radius: 7px;
+}
+
+.sp-info-bar-wrap.selected .sp-info-bar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: #c4001a;
+  z-index: 1;
+}
+
+.sp-info-bar-text {
+  flex: 1;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: 2px;
+  color: #8df6ff;
+  text-shadow: 2px 2px 0px #000000, 0 3px 12px rgba(0, 0, 0, 0.95), 0 0 10px rgba(0, 0, 0, 0.8);
+  padding: 0 12px;
+  user-select: none;
+  transition: color 0.15s ease, text-shadow 0.15s ease;
+}
+
+.sp-info-bar-wrap.selected .sp-info-bar-text {
+  color: var(--p3-bg-dark);
+  text-shadow: none;
+}
+
+.sp-info-bar-box {
+  height: 68%;
+  background: #000;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 1px;
+  color: #fff;
+  flex-shrink: 0;
+  border-radius: 6px;
+  margin-right: 4px;
+  user-select: none;
+  box-shadow: 2px 2px 0px #000000, 0 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.sp-info-bar-count {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  letter-spacing: 1px;
+  color: #8df6ff;
+  text-shadow: 2px 2px 0px #000000, 0 3px 12px rgba(0, 0, 0, 0.95), 0 0 10px rgba(0, 0, 0, 0.8);
+  flex-shrink: 0;
+  user-select: none;
+  margin-right: 14px;
+  transition: color 0.15s ease, text-shadow 0.15s ease;
+}
+
+.sp-info-bar-wrap.selected .sp-info-bar-count {
+  color: #111;
+  text-shadow: none;
+}
+
+/* ── Persona 3 Navigation Buttons ── */
+.p3-row-clone {
+  position: relative;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  line-height: 1;
+  text-decoration: none;
+  opacity: 0;
+  transform: translateX(-36px);
+  transition: opacity 0.38s ease, transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sp-container.mounted .p3-row-clone {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.p3-skew-wrap-clone {
+  position: relative;
+  display: flex;
+  align-items: center;
+  isolation: isolate;
+}
+
+.p3-shadow-tri-clone {
+  position: absolute;
+  top: 50%;
+  left: -10%;
+  width: 120%;
+  height: 100%;
+  transform-origin: left center;
+  background: rgba(196, 0, 26, 0.88);
+  z-index: 1;
+  pointer-events: none;
+  transform: translateY(-40%) translateX(-12px) scaleX(0);
+  transition: transform 0.18s ease;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+.p3-row-clone:hover .p3-shadow-tri-clone {
+  transform: translateY(-40%) translateX(-12px) scaleX(1);
+}
+
+.p3-highlight-clone {
+  position: absolute;
+  top: 50%;
+  left: -10%;
+  width: 120%;
+  height: 100%;
+  transform-origin: left center;
+  background: #ffffff;
+  z-index: 2;
+  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+  transform: translateY(-50%) scaleX(0);
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+.p3-row-clone:hover .p3-highlight-clone {
+  transform: translateY(-50%) scaleX(1);
+}
+
+.p3-label-wrap-clone {
+  position: relative;
+  z-index: 3;
+}
+
+.p3-label-base-clone {
+  font-family: 'Anton', sans-serif;
+  font-style: italic;
+  letter-spacing: 2px;
+  line-height: 0.85;
+  display: block;
+  white-space: nowrap;
+}
+
+.p3-label-dark-clone {
+  color: #ff2a2a;
+  text-shadow: 3px 3px 0px #000000, 0 4px 16px rgba(0, 0, 0, 0.95), 0 0 18px rgba(255, 42, 42, 0.45);
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.85));
+  transition: color 0.15s ease, text-shadow 0.15s ease;
+}
+
+.p3-row-clone:hover .p3-label-dark-clone {
+  color: #ffffff;
+  text-shadow: 3px 3px 0px #c4001a, 0 0 20px rgba(255, 42, 42, 0.9);
+}
+
+.p3-label-bright-clone {
+  color: #ffffff;
+  text-shadow: 2px 2px 0px #000000, 0 0 16px rgba(255, 42, 42, 0.9);
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+.p3-row-clone:hover .p3-label-bright-clone {
+  opacity: 1;
+}

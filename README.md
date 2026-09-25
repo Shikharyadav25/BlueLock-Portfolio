@@ -1,4 +1,4 @@
-# Blue Lock Portfolio
+## Introductory Portfolio
 
 A Blue Lock-inspired portfolio website built using React.
 
